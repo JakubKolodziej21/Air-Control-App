@@ -30,6 +30,14 @@ class _SplashScreenState extends State<SplashScreen> {
         fit: StackFit.expand,        
         children: <Widget>[
           Container(
+            decoration: BoxDecoration(
+              color: new Color(0xffffffff),
+              gradient: LinearGradient(
+                begin: Alignment.centerRight,
+                end: Alignment.centerLeft,
+                colors: [new Color.fromARGB(255, 8, 218, 225), Color.fromARGB(255, 255, 0, 242)]
+              )
+             ),
 
           ),
           Align(
