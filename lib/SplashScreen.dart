@@ -1,14 +1,10 @@
 
+import 'package:air_control_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key, required this.title});
-
-  
-
-  final String title;
-
+ 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
@@ -49,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
               children: <Widget>[
                 Image(image: AssetImage('icons/cloud-sun.png')),
                 Padding(padding: EdgeInsets.only(top: 15.0)),
-                Text(widget.title,
+                Text(Strings.appTitle,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.lato(
                   textStyle: TextStyle(
