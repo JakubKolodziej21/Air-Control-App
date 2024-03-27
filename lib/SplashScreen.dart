@@ -1,4 +1,5 @@
 
+import 'package:air_control_app/PermissionScreen.dart';
 import 'package:air_control_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,12 +17,15 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    
+
+    new Future.delayed(
+      const Duration(seconds: 2),
+        () => {
+          Navigator.push(context,
+            MaterialPageRoute(builder: (context) => PermissionScreen())
+    )});
+
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,        
