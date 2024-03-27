@@ -1,4 +1,5 @@
 
+import 'package:air_control_app/MyHomePage.dart';
 import 'package:air_control_app/PermissionScreen.dart';
 import 'package:air_control_app/main.dart';
 import 'package:flutter/material.dart';
@@ -22,9 +23,18 @@ class _SplashScreenState extends State<SplashScreen> {
     new Future.delayed(
       const Duration(seconds: 2),
         () => {
+          if(havePermission()){
           Navigator.push(context,
-            MaterialPageRoute(builder: (context) => PermissionScreen())
-    )});
+            MaterialPageRoute(builder: (context) => PermissionScreen()))
+          }
+          else{
+            //todo load data
+            Navigator.push(context,
+            MaterialPageRoute(builder: (context) => MyHomePage()))
+          }
+
+          
+    });
 
     return Scaffold(
       body: Stack(
@@ -92,5 +102,9 @@ class _SplashScreenState extends State<SplashScreen> {
         ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+  
+  bool havePermission() {
+    return true;
   }
 }

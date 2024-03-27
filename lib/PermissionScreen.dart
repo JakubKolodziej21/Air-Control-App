@@ -1,4 +1,5 @@
 
+import 'package:air_control_app/MyHomePage.dart';
 import 'package:air_control_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -83,7 +84,11 @@ class _PermissionScreenState extends State<PermissionScreen> {
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
                 padding: MaterialStateProperty.all(EdgeInsets.only(top:12.0,bottom:12.0)),
               ),
-              onPressed: () {  },
+              onPressed: () { 
+                //todo ask about permissions
+                Navigator.push(context,
+                MaterialPageRoute(builder: (context) => MyHomePage()));
+               },
               child: Text(
                 'Zgoda!',
                 style: TextStyle(fontSize: 16.0, color: Colors.black),
