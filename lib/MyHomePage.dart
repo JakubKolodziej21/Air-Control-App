@@ -24,8 +24,17 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        child: Text('Home'),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+        BottomNavigationBarItem(icon: Icon(Icons.air_outlined), label: 'Powietrze'),
+        BottomNavigationBarItem(icon: Icon(Icons.cloud_outlined), label: 'Pogoda')
+        ],
+      ),
+       // This trailing comma makes auto-formatting nicer for build methods.
+    )
+    
+    ;
   }
 }
