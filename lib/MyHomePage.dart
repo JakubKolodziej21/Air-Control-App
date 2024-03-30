@@ -1,4 +1,6 @@
 
+import 'package:air_control_app/AirScreen.dart';
+import 'package:air_control_app/WeatherScreen.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -8,6 +10,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  var _currentIndex = 0;
+  final screens = [
+    AirScreen(),
+    WeatherScreen()
+    ];
   
 
   
@@ -21,12 +28,14 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Text('Home'),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: screens,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.blueAccent,
+        currentIndex: _currentIndex,
+        onTap: (index) => setState(()=>_currentIndex = index),
         items: [
         BottomNavigationBarItem(icon: Icon(Icons.air_outlined), label: 'Powietrze'),
         BottomNavigationBarItem(icon: Icon(Icons.cloud_outlined), label: 'Pogoda')
