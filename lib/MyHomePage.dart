@@ -34,6 +34,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.blueAccent,
+        unselectedItemColor: Colors.black45,
+        backgroundColor: Colors.white,
+        // iconSize: 30,
+        // showSelectedLabels: false,
+        // showUnselectedLabels: false,
         currentIndex: _currentIndex,
         onTap: (index) => setState(()=>_currentIndex = index),
         items: [

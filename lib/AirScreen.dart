@@ -30,7 +30,7 @@ class _AirScreenState extends State<AirScreen> {
               gradient: LinearGradient(
                 begin: Alignment.centerRight,
                 end: Alignment.centerLeft,
-                colors: [Color(0xFF00F7FF), Color.fromARGB(255, 52, 133, 255)]
+                colors: [ Color.fromARGB(255, 142, 192, 164),Color.fromARGB(255, 120, 148, 143)]
               )
              ),
 
@@ -41,7 +41,8 @@ class _AirScreenState extends State<AirScreen> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image(image: AssetImage('icons/cloud-sun.png')),
+                Image(image: AssetImage('icons/cloud-sun.png'),
+                color: Colors.black),
                 Padding(padding: EdgeInsets.only(top: 15.0)),
                 Text(Strings.appTitle,
                 textAlign: TextAlign.center,
@@ -49,7 +50,7 @@ class _AirScreenState extends State<AirScreen> {
                   textStyle: TextStyle(
                     fontSize: 42.0,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                   ) 
                 ),),
                 Padding(padding: EdgeInsets.only(top: 5.0)),
@@ -58,7 +59,7 @@ class _AirScreenState extends State<AirScreen> {
                 style: GoogleFonts.lato(
                   textStyle: TextStyle(
                     fontSize: 16.0,
-                    color: Colors.white,
+                    color: Colors.black,
                   ) 
                 ),),
 
@@ -79,7 +80,7 @@ class _AirScreenState extends State<AirScreen> {
                   textStyle: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.w300,
-                    color: Colors.white,
+                    color: Colors.black,
                   ) 
                 ),),
           ))
