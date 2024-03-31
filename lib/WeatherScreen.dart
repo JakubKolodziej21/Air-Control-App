@@ -28,9 +28,17 @@ class _WeatherScreenState extends State<WeatherScreen> {
             decoration: BoxDecoration(
               color: new Color(0xffffffff),
               gradient: LinearGradient(
-                begin: Alignment.centerRight,
-                end: Alignment.centerLeft,
-                colors: [Color(0xFF00F7FF), Color.fromARGB(255, 52, 133, 255)]
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
+                colors: [
+                  new Color(0xff6E6CD8),
+                  new Color(0xff40A0EF),
+                  new Color(0xff77E1EE),
+                ]
+
+       
+
+
               )
              ),
 
@@ -46,10 +54,38 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   image: AssetImage('icons/weather-sunny.png')
                   ),
                 Padding(padding: EdgeInsets.only(top: 41.0)),
-                Text('Niedziela 31.03, 11:00 słonecznie'),
+                Text('Niedziela 31.03, 11:00 słonecznie',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                    fontSize: 14.0,
+                    height: 1.2,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                  )
+                ),),
                 Padding(padding: EdgeInsets.only(top: 12.0)),
-                Text('14°C'),
-                Text('Odczuwalna 13°C'),
+                Text('14°C',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                    fontSize: 64.0,
+                    height: 1.2,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                  )
+                ),),
+                Text('Odczuwalna 13°C',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                    fontSize: 14.0,
+                    height: 1.2,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                  )
+                ),),
+                 Padding(padding: EdgeInsets.only(top : 25.0)),
                 IntrinsicHeight(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -59,9 +95,27 @@ class _WeatherScreenState extends State<WeatherScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Text('Ciśnienie'),
+                            Text('Ciśnienie',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                    fontSize: 22.0,
+                    height: 1.2,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                  )
+                ),),
                             Padding(padding: EdgeInsets.only(top : 2.0)),
-                            Text('1020 hPa')
+                            Text('1020 hPa',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                    fontSize: 26.0,
+                    height: 1.2,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                  )
+                ),)
                           ],
 
                         ),
@@ -69,6 +123,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       VerticalDivider(
                         width: 48,
                         thickness: 1,
+                        color: Colors.white,
                       ),
 
                       Container(
@@ -76,9 +131,27 @@ class _WeatherScreenState extends State<WeatherScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Text('Wiatr'),
+                            Text('Wiatr',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                              fontSize: 22.0,
+                              height: 1.2,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                            )
+                          ),),
                             Padding(padding: EdgeInsets.only(top : 2.0)),
-                            Text('16 km/h')
+                            Text('16 km/h',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                    fontSize: 26.0,
+                    height: 1.2,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                  )
+                ),)
                           ],
 
                         ),
@@ -88,7 +161,16 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   ),
                   ),
                     Padding(padding: EdgeInsets.only(top : 24.0)),
-                    Text('0,1 mm/12h'),
+                    Text('Opady: 0,1 mm/12h',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                              fontSize: 14.0,
+                              height: 1.2,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400,
+                            )
+                          ),),
                     Padding(padding: EdgeInsets.only(top : 68.0)),
 
 
