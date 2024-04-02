@@ -2,8 +2,10 @@ import 'package:air_control_app/MyHomePage.dart';
 import 'package:air_control_app/PermissionScreen.dart';
 import 'package:air_control_app/SplashScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
+ //initializeDateFormatting('pl');
   runApp(MyApp());
 }
 

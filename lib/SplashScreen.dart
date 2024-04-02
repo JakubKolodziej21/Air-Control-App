@@ -1,6 +1,4 @@
 
-import 'dart:math';
-
 import 'package:air_control_app/MyHomePage.dart';
 import 'package:air_control_app/PermissionScreen.dart';
 import 'package:air_control_app/main.dart';
@@ -130,8 +128,9 @@ void initState(){
   
   void executeOnceAfterBuild() async {
       WeatherFactory wf = new WeatherFactory("e64cdba61068db9c85abd44df9db60e8", language: Language.POLISH);
-      Weather w = await wf.currentWeatherByCityName("Bochnia");
+      Weather w = await wf.currentWeatherByCityName("Como");
       print(w.toJson().toString());
-      //todo Navigator.push ...
-  }
-}
+      Navigator.push(context,
+      MaterialPageRoute(builder: (context) => MyHomePage(weather: w)));
+     
+     }}
