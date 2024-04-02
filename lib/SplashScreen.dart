@@ -1,9 +1,13 @@
 
+import 'dart:math';
+
 import 'package:air_control_app/MyHomePage.dart';
 import 'package:air_control_app/PermissionScreen.dart';
 import 'package:air_control_app/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:weather/weather.dart';
 
 class SplashScreen extends StatefulWidget {
  
@@ -20,21 +24,21 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     
 
-    new Future.delayed(
-      const Duration(seconds: 2),
-        () => {
-          if(havePermission()){
-          Navigator.push(context,
-            MaterialPageRoute(builder: (context) => PermissionScreen()))
-          }
-          else{
-            //todo load data
-            Navigator.push(context,
-            MaterialPageRoute(builder: (context) => MyHomePage()))
-          }
+    // new Future.delayed(
+    //   const Duration(seconds: 2),
+    //     () => {
+    //       if(havePermission()){
+    //       Navigator.push(context,
+    //         MaterialPageRoute(builder: (context) => PermissionScreen()))
+    //       }
+    //       else{
+    //         //todo load data
+    //         Navigator.push(context,
+    //         MaterialPageRoute(builder: (context) => MyHomePage()))
+    //       }
 
           
-    });
+    // });
 
     return Scaffold(
       body: Stack(
@@ -104,7 +108,30 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
   
-  bool havePermission() {
-    return true;
+@override
+void initState(){
+    super.initState();
+    if(permissionDenied()){
+      Navigator.push(
+        context, MaterialPageRoute(builder: (context) => PermissionScreen()));
+    }
+    else{
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+
+          executeOnceAfterBuild();
+
+        });
+    }
+}
+
+  bool permissionDenied() {
+    return false;
+  }
+  
+  void executeOnceAfterBuild() async {
+      WeatherFactory wf = new WeatherFactory("e64cdba61068db9c85abd44df9db60e8", language: Language.POLISH);
+      Weather w = await wf.currentWeatherByCityName("Bochnia");
+      print(w.toJson().toString());
+      //todo Navigator.push ...
   }
 }
