@@ -128,7 +128,7 @@ void initState(){
   
   void executeOnceAfterBuild() async {
       WeatherFactory wf = new WeatherFactory("e64cdba61068db9c85abd44df9db60e8", language: Language.POLISH);
-      Weather w = await wf.currentWeatherByCityName("Como");
+      Weather w = await wf.currentWeatherByCityName("Kraków");
       print(w.toJson().toString());
       Navigator.push(context,
       MaterialPageRoute(builder: (context) => MyHomePage(weather: w)));

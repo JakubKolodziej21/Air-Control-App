@@ -206,16 +206,30 @@ class _WeatherScreenState extends State<WeatherScreen> {
  LinearGradient getGradientByMood(Weather? weather) {
 
 var main = weather?.weatherMain;
-    if (main == 'Clouds' || main == 'Drizzle' || main == "Snow") {
+    if (main == 'Clouds' || main == 'Drizzle' || main == "Snow" && isNight(weather!)) {
       return LinearGradient(
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,
           colors: [
-            new Color(0xff6E6CD8),
+           Color.fromARGB(255, 60, 59, 119),
+            Color.fromARGB(255, 35, 89, 133),
+            Color.fromARGB(255, 31, 56, 59)
+          ]);
+    } 
+    
+  else if(main == 'Clouds' || main == 'Drizzle' || main == "Snow") {
+      return LinearGradient(
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
+          colors: [
+            
+             new Color(0xff6E6CD8),
             new Color(0xff40A0EF),
             new Color(0xff77E1EE)
           ]);
-    } else if (main == 'Thunderstorm' || isNight(weather!)) {
+    }
+
+    else if (main == 'Thunderstorm' || isNight(weather!)) {
       return LinearGradient(
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
