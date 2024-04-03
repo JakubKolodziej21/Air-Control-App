@@ -41,49 +41,172 @@ class _AirScreenState extends State<AirScreen> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image(image: AssetImage('icons/cloud-sun.png'),
-                color: Colors.black),
-                Padding(padding: EdgeInsets.only(top: 15.0)),
-                Text(Strings.appTitle,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.lato(
-                  textStyle: TextStyle(
-                    fontSize: 42.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ) 
-                ),),
-                Padding(padding: EdgeInsets.only(top: 5.0)),
-                Text('Powietrze',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.lato(
-                  textStyle: TextStyle(
-                    fontSize: 16.0,
-                    color: Colors.black,
-                  ) 
-                ),),
+                  Text("Jakość Powietrza",),
+                  Padding(padding: EdgeInsets.only(top: 2)),
+                  Text("Bardzo dobra",),
+                Padding(padding: EdgeInsets.only(top: 24.0)),
+                CircleAvatar(
+                  radius: 91.0,
+                  child: Center(  
+                    child: Container(
+                      child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("23",
+                        textAlign: TextAlign.center,),
+                        Text("CAQI ⓘ",
+                        textAlign: TextAlign.center,),
 
+                          
+
+                      ],),
+                    ),
+                  )
+                ),
+                        Padding(padding: EdgeInsets.only(top: 28.0)),
+
+                IntrinsicHeight(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 130,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text('PM 2,5',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                    fontSize: 22.0,
+                    height: 1.2,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                  )
+                ),),
+                            Padding(padding: EdgeInsets.only(top : 2.0)),
+                            Text('20%',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                    fontSize: 26.0,
+                    height: 1.2,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                  )
+                ),)
+                          ],
+
+                        ),
+                      ),
+                      VerticalDivider(
+                        width: 48,
+                        thickness: 1,
+                        color: Colors.white,
+                      ),
+
+                      Container(
+                        width: 130,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text('PM 10',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                              fontSize: 22.0,
+                              height: 1.2,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                            )
+                          ),),
+                            Padding(padding: EdgeInsets.only(top : 2.0)),
+                            Text('12%',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                    fontSize: 26.0,
+                    height: 1.2,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                  )
+                ),)
+                          ],
+
+                        ),
+                      ),
+
+                    ],
+                  ),
+                  ),
+                   Padding(padding: EdgeInsets.only(top: 20.0),),
+                  Text("Stacja pomiarowa:"),
+                  Padding(padding: EdgeInsets.only(top: 8.0),),
+
+                  Text("Bochnia"),
+                 
+
+
+                
               ],
             )
 
           ),
           Positioned(
-            left: 0,
+            top: 0,
+            left: 8,
             right: 0,
-            bottom: 35,
+            bottom: 0,
             
             child: Container(
-            alignment: Alignment.center,
-            child: Text('Przedmuchuje dane...',
-            textAlign: TextAlign.center,
-                style: GoogleFonts.lato(
-                  textStyle: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w300,
-                    color: Colors.black,
-                  ) 
-                ),),
-          ))
+            alignment: Alignment.centerLeft,
+            child: Stack(children: [
+              ClipRect(
+                child: Align(
+                alignment: Alignment.topLeft,
+                heightFactor: 1,
+                child: Image.asset('icons/danger-value-negative.png', scale: 0.9,),
+              ),),
+              ClipRect(
+                child: Align(
+                alignment: Alignment.topLeft,
+                heightFactor: 1-0.4,
+                child: Image.asset('icons/danger-value.png', scale: 0.9,),
+              ),)
+            ],),
+          )),
+          Positioned(
+          left: 0,
+          right: 0,
+          bottom: 0,
+          child: Container(alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(padding: EdgeInsets.only(
+                  top: 62.0, right: 10, bottom: 14, left: 10),
+              child: Divider(color: Colors.black,
+              height: 10,
+              thickness: 1.0,)),
+
+          Padding(padding: EdgeInsets.only(
+                   bottom: 24,right: 10, left: 10),
+             
+             child:  ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Container(
+                  color: Colors.white,
+                  child: Text('Testowa wiadomość'),
+                ),
+              )
+               ),
+              
+              
+
+      ],
+          ),
+          
+          ),
+          )
         ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
