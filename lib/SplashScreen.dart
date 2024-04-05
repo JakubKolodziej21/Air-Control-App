@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'package:air_control_app/MyHomePage.dart';
 import 'package:air_control_app/PermissionScreen.dart';
 import 'package:air_control_app/main.dart';
@@ -6,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:weather/weather.dart';
+import 'package:http/http.dart' as http;
 
 class SplashScreen extends StatefulWidget {
  
@@ -130,7 +133,70 @@ void initState(){
       WeatherFactory wf = new WeatherFactory("e64cdba61068db9c85abd44df9db60e8", language: Language.POLISH);
       Weather w = await wf.currentWeatherByCityName("Kraków");
       print(w.toJson().toString());
+     
+     
+    var lat = 49.969307;
+    var lon = 20.430398;
+
+    const token = '423a8eab34df9fdb9eaf0fb8da1071b06a2963c8';
+    var keyword = 'geo:$lat;$lon';
+    String _endpoint = 'https://api.waqi.info/feed/';
+    String url = '$_endpoint/$keyword/?token=$token';
+    
+
+    http.Response response = await http.get(Uri.parse(url));
+
+    print(response.body.toString());
+     
+     
+      Map<String, dynamic> jsonBody = json.decode(response.body);
+      AirQuality aq = new AirQuality(jsonBody);
+     
       Navigator.push(context,
       MaterialPageRoute(builder: (context) => MyHomePage(weather: w)));
      
+
+
+
+    
      }}
+
+//49°58'09.5"N 20°25'49.7"E
+
+class AirQuality{
+bool isGood = false;
+bool isBad = false;
+String quality = '';
+String advice = '';
+int aqi = 0;
+int pm25 = 0;
+int pm10 = 0;
+String station = '';
+
+AirQuality(Map<String, dynamic> jsonBody){
+
+aqi =  int.tryParse(jsonBody['data']['aqi'].toString())?? -1 ;
+pm25 = int.tryParse(jsonBody['data']['iaqi']['pm25']['v'].toString())?? -1 ;
+pm10 = int.tryParse(jsonBody['data']['iaqi']['pm10']['v'].toString())?? -1 ;
+station = jsonBody['data']['city']['name'].toString();
+setupLevel(aqi);
+
+
+
+}
+
+  void setupLevel(int aqi) {
+    if( aqi <= 100){
+      quality = 'Bardzo dobra';
+      advice = 'Idź sprzed komputera i zaczerpnij powietrza';
+    }else if(aqi <= 150){
+      quality = 'Taka średnia';
+      advice = 'Zostań przy komputerze jeśli możesz';
+    }else{
+      quality = 'Tragiczna!';
+      advice = 'Zamknij okno nie wietrz swojego miasta!';
+    }
+
+
+  }
+}
