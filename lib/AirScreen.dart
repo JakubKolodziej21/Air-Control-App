@@ -1,12 +1,18 @@
 
 import 'package:air_control_app/MyHomePage.dart';
 import 'package:air_control_app/PermissionScreen.dart';
+import 'package:air_control_app/SplashScreen.dart';
 import 'package:air_control_app/main.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AirScreen extends StatefulWidget {
  
+  AirScreen({required this.air});
+
+final AirQuality air;
+
   @override
   State<AirScreen> createState() => _AirScreenState();
 }
@@ -27,11 +33,8 @@ class _AirScreenState extends State<AirScreen> {
           Container(
             decoration: BoxDecoration(
               color: new Color(0xffffffff),
-              gradient: LinearGradient(
-                begin: Alignment.centerRight,
-                end: Alignment.centerLeft,
-                colors: [ Color.fromARGB(255, 142, 192, 164),Color(0xFF78948F)]
-              )
+              gradient: getGradientByMood(widget.air)
+              
              ),
 
           ),
@@ -47,18 +50,18 @@ class _AirScreenState extends State<AirScreen> {
                   textStyle: TextStyle(
                     fontSize: 14.0,
                     height: 1.2,
-                    color: Colors.black,
+                    color: getBackgroundTextColor(widget.air),
                     fontWeight: FontWeight.w300,
                   )
                 ),),
                   Padding(padding: EdgeInsets.only(top: 2)),
-                  Text("Bardzo dobra",
+                  Text(widget.air.quality,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.lato(
                   textStyle: TextStyle(
                     fontSize: 22.0,
                     height: 1.2,
-                    color: Colors.black,
+                    color: getBackgroundTextColor(widget.air),
                     fontWeight: FontWeight.w700,
                   )
                 ),),
@@ -70,8 +73,8 @@ class _AirScreenState extends State<AirScreen> {
                     child: Container(
                       child: Column(mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("23",
-                textAlign: TextAlign.center,
+                        Text(
+                          (widget.air.aqi /200 * 100).floor().toString(),
                 style: GoogleFonts.lato(
                   textStyle: TextStyle(
                     fontSize: 64.0,
@@ -114,18 +117,18 @@ class _AirScreenState extends State<AirScreen> {
                   textStyle: TextStyle(
                     fontSize: 14.0,
                     height: 1.2,
-                    color: Colors.black,
+                    color:getBackgroundTextColor(widget.air),
                     fontWeight: FontWeight.w300,
                   )
                 ),),
                             Padding(padding: EdgeInsets.only(top : 2.0)),
-                            Text('20%',
+                            Text( widget.air.pm25.toString() +'%',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.lato(
                   textStyle: TextStyle(
                     fontSize: 22.0,
                     height: 1.2,
-                    color: Colors.black,
+                    color: getBackgroundTextColor(widget.air),
                     fontWeight: FontWeight.w700,
                   )
                 ),)
@@ -136,7 +139,7 @@ class _AirScreenState extends State<AirScreen> {
                       VerticalDivider(
                         width: 24,
                         thickness: 1,
-                        color: Colors.black,
+                        color:getBackgroundTextColor(widget.air),
                       ),
 
                       Container(
@@ -150,18 +153,18 @@ class _AirScreenState extends State<AirScreen> {
                             textStyle: TextStyle(
                               fontSize: 14.0,
                               height: 1.2,
-                              color: Colors.black,
+                              color: getBackgroundTextColor(widget.air),
                               fontWeight: FontWeight.w300,
                             )
                           ),),
                             Padding(padding: EdgeInsets.only(top : 2.0)),
-                            Text('12%',
+                            Text(widget.air.pm10.toString() +'%',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.lato(
                   textStyle: TextStyle(
                     fontSize: 22.0,
                     height: 1.2,
-                    color: Colors.black,
+                    color:getBackgroundTextColor(widget.air),
                     fontWeight: FontWeight.w700,
                   )
                 ),)
@@ -181,20 +184,20 @@ class _AirScreenState extends State<AirScreen> {
                   textStyle: TextStyle(
                     fontSize: 12.0,
                     height: 1.2,
-                    color: Colors.black,
+                    color: getBackgroundTextColor(widget.air),
                     fontWeight: FontWeight.w300,
                   )
                 ),),
                   Padding(padding: EdgeInsets.only(top: 8.0),),
 
-                  Text("Bochnia",
+                  Text(widget.air.station.toString(),
                   
                 textAlign: TextAlign.center,
                 style: GoogleFonts.lato(
                   textStyle: TextStyle(
                     fontSize: 14.0,
                     height: 1.2,
-                    color: Colors.black,
+                    color:getBackgroundTextColor(widget.air),
                     fontWeight: FontWeight.w400,
                   )
                 ),),
@@ -227,7 +230,7 @@ class _AirScreenState extends State<AirScreen> {
               ClipRect(
                 child: Align(
                 alignment: Alignment.topLeft,
-                heightFactor: 1-0.4,
+                heightFactor: 1-widget.air.aqi/200.floor(),
                 child: Image.asset('icons/danger-value.png', color: Color.fromARGB(207, 120, 148, 143),scale: 0.9,),
               ),)
             ],),
@@ -242,7 +245,7 @@ class _AirScreenState extends State<AirScreen> {
             children: [
               Padding(padding: EdgeInsets.only(
                   top: 62.0, right: 10, bottom: 14, left: 10),
-              child: Divider(color: Colors.black,
+              child: Divider(color:getBackgroundTextColor(widget.air),
               height: 10,
               thickness: 1.0,)),
 
@@ -261,10 +264,10 @@ class _AirScreenState extends State<AirScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image(alignment: Alignment.centerLeft,
-                       image: AssetImage('icons/happy.png'), ),
+                       image: getAdviceImage(widget.air), ),
                         Padding(padding: EdgeInsets.only(left: 8.0) ),
                         
-                        Text('Test'),
+                        Text(widget.air.advice),
 
                          ],),)
 
@@ -287,5 +290,63 @@ class _AirScreenState extends State<AirScreen> {
   
   bool havePermission() {
     return true;
+  }
+  
+  LinearGradient getGradientByMood(AirQuality air) {
+
+    if (air.isGood) {
+      return LinearGradient(
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
+          colors: [
+           Color.fromARGB(255, 92, 175, 81),
+            Color.fromARGB(255, 48, 216, 25),
+            Color.fromARGB(255, 50, 155, 24)
+          ]);
+    } 
+    
+  else if(air.isBad) {
+       return LinearGradient(
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
+          colors: [
+           Color.fromARGB(255, 169, 175, 81),
+            Color.fromARGB(255, 181, 216, 25),
+            Color.fromARGB(255, 238, 255, 0)
+          ]);
+    }
+
+    else {
+       return LinearGradient(
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
+          colors: [
+           Color.fromARGB(255, 175, 103, 81),
+            Color.fromARGB(255, 216, 38, 25),
+            Color.fromARGB(255, 255, 0, 0)
+          ]);
+    };
+  }
+  
+  Color getBackgroundTextColor(AirQuality air) {
+    
+    if(air.isGood || air.isBad){
+      return Colors.black;
+    }else{
+      return Colors.white;
+    }
+
+
+  }
+  
+  getAdviceImage(AirQuality air) {
+
+    if(air.isGood){
+  return AssetImage('icons/happy.png');
+}else if(air.isBad){
+  return AssetImage('icons/sad.png');
+}else{
+  return AssetImage('icons/ok.png');
+}
   }
 }

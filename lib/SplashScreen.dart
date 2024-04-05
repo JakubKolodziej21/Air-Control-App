@@ -153,7 +153,7 @@ void initState(){
       AirQuality aq = new AirQuality(jsonBody);
      
       Navigator.push(context,
-      MaterialPageRoute(builder: (context) => MyHomePage(weather: w)));
+      MaterialPageRoute(builder: (context) => MyHomePage(weather: w, air: aq)));
      
 
 
@@ -189,9 +189,11 @@ setupLevel(aqi);
     if( aqi <= 100){
       quality = 'Bardzo dobra';
       advice = 'Idź sprzed komputera i zaczerpnij powietrza';
+      isGood = true;
     }else if(aqi <= 150){
       quality = 'Taka średnia';
       advice = 'Zostań przy komputerze jeśli możesz';
+      isBad = true;
     }else{
       quality = 'Tragiczna!';
       advice = 'Zamknij okno nie wietrz swojego miasta!';
