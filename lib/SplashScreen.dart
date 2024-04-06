@@ -6,6 +6,7 @@ import 'package:air_control_app/PermissionScreen.dart';
 import 'package:air_control_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:weather/weather.dart';
 import 'package:http/http.dart' as http;
@@ -111,8 +112,14 @@ class _SplashScreenState extends State<SplashScreen> {
   
 @override
 void initState(){
-    super.initState();
-    if(permissionDenied()){
+    super.initState(); 
+    checkPermission();
+}
+
+  checkPermission() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+    if(permission == LocationPermission.denied ||
+      permission == LocationPermission.deniedForever){
       Navigator.push(
         context, MaterialPageRoute(builder: (context) => PermissionScreen()));
     }
@@ -120,13 +127,12 @@ void initState(){
         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
 
           executeOnceAfterBuild();
-
         });
+        
     }
-}
-
-  bool permissionDenied() {
-    return false;
+  
+     
+    
   }
   
   void executeOnceAfterBuild() async {
