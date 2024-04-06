@@ -1,12 +1,12 @@
-
-import 'package:air_control_app/MyHomePage.dart';
 import 'package:air_control_app/SplashScreen.dart';
-import 'package:air_control_app/main.dart';
+import 'package:air_control_app/main.dart' show Strings;
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PermissionScreen extends StatefulWidget {
+  const PermissionScreen({super.key});
+
   
   @override
   State<PermissionScreen> createState() => _PermissionScreenState();
@@ -30,8 +30,8 @@ class _PermissionScreenState extends State<PermissionScreen> {
         fit: StackFit.expand,        
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(
-              color: new Color(0xffffffff),
+            decoration: const BoxDecoration(
+              color: Color(0xffffffff),
               gradient: LinearGradient(
                 begin: Alignment.centerRight,
                 end: Alignment.centerLeft,
@@ -46,22 +46,22 @@ class _PermissionScreenState extends State<PermissionScreen> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image(image: AssetImage('icons/hand-wave.png')),
-                Padding(padding: EdgeInsets.only(top: 15.0)),
+                const Image(image: AssetImage('icons/hand-wave.png')),
+                const Padding(padding: EdgeInsets.only(top: 15.0)),
                 Text('Hej!',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.lato(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     fontSize: 50.0,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ) 
                 ),),
-                Padding(padding: EdgeInsets.only(top: 5.0)),
+                const Padding(padding: EdgeInsets.only(top: 5.0)),
                 Text('Aplikacja ${Strings.appTitle} potrzebuje do działania\nprzybliżonej lokalizacji twojego urządzenia',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.lato(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     fontSize: 16.0,
                     color: Colors.white,
                   ) 
@@ -78,25 +78,22 @@ class _PermissionScreenState extends State<PermissionScreen> {
             
             child: Container(
             alignment: Alignment.center,
-            margin:EdgeInsets.only(left: 10.0, right: 10.0),
+            margin:const EdgeInsets.only(left: 10.0, right: 10.0),
             child: SizedBox(
               width: double.infinity,
             child: ElevatedButton(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                padding: MaterialStateProperty.all(EdgeInsets.only(top:12.0,bottom:12.0)),
+                padding: MaterialStateProperty.all(const EdgeInsets.only(top:12.0,bottom:12.0)),
               ),
               onPressed: () async {
                       LocationPermission permission =
                           await Geolocator.requestPermission();
                       if (permission == LocationPermission.always ||
                           permission == LocationPermission.whileInUse) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SplashScreen()));
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => const SplashScreen()));
                       }
-                    }, child: Text(
+                    }, child: const Text(
                       'Zgoda!',
                       style: TextStyle(fontSize: 16.0, color: Colors.black),
                     ),

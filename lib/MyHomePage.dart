@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:weather/weather.dart';
 
 class MyHomePage extends StatefulWidget {
-    const MyHomePage({this.weather, this.air});
+    const MyHomePage({super.key, this.weather, this.air});
 
     final Weather? weather;
     final AirQuality? air;
@@ -62,7 +62,7 @@ screens = [
         // showUnselectedLabels: false,
         currentIndex: _currentIndex,
         onTap: (index) => setState(()=>_currentIndex = index),
-        items: [
+        items: const [
         BottomNavigationBarItem(icon: Icon(Icons.air_outlined), label: 'Powietrze'),
         BottomNavigationBarItem(icon: Icon(Icons.cloud_outlined), label: 'Pogoda')
         ],

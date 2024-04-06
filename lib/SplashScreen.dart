@@ -12,6 +12,8 @@ import 'PermissionScreen.dart';
 import 'main.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -22,8 +24,8 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Stack(fit: StackFit.expand, children: <Widget>[
         Container(
-          decoration: BoxDecoration(
-              color: new Color(0xffffffff),
+          decoration: const BoxDecoration(
+              color: Color(0xffffffff),
               gradient: LinearGradient(
                   begin: Alignment.centerRight,
                   end: Alignment.centerLeft,
@@ -34,23 +36,23 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image(
+                const Image(
                   image: AssetImage('icons/cloud-sun.png'),
                 ),
-                Padding(padding: EdgeInsets.only(top: 15.0)),
+                const Padding(padding: EdgeInsets.only(top: 15.0)),
                 Text(Strings.appTitle,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.lato(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 42.0,
                           color: Colors.white,
                         ))),
-                Padding(padding: EdgeInsets.only(top: 5.0)),
+                const Padding(padding: EdgeInsets.only(top: 5.0)),
                 Text('Aplikacja do monitorowania \n czystości powietrza',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.lato(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           fontSize: 16.0,
                           color: Colors.white,
                         ))),
@@ -65,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Text("Przywiewam dane...",
                   textAlign: TextAlign.center,
                   style: GoogleFonts.lato(
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         fontWeight: FontWeight.w300,
                         fontSize: 18.0,
                         color: Colors.white,
@@ -86,7 +88,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (permission == LocationPermission.denied ||
         permission == LocationPermission.deniedForever) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => PermissionScreen()));
+          context, MaterialPageRoute(builder: (context) => const PermissionScreen()));
     } else {
       SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
         executeOnceAfterBuild();
@@ -98,7 +100,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.best,
         forceAndroidLocationManager: true,
-        timeLimit: Duration(seconds: 5))
+        timeLimit: const Duration(seconds: 5))
         .then((value) => { loadLocationData(value)})
         .onError((error, stackTrace) => {
           Geolocator.getLastKnownPosition(forceAndroidLocationManager: true)
@@ -150,7 +152,7 @@ class AirQuality {
   AirQuality(Map<String, dynamic> jsonBody) {
     aqi = int.tryParse(jsonBody['data']['aqi'].toString()) ?? -1;
     pm25 = int.tryParse(jsonBody['data']['iaqi']['pm25']['v'].toString()) ?? -1;
-    pm10 = int.tryParse(jsonBody['data']['iaqi']['pm10']['v'].toString()) ?? -1;
+    pm10 = 0 ;
     station = jsonBody['data']['city']['name'].toString();
     setupLevel(aqi);
   }
@@ -158,15 +160,15 @@ class AirQuality {
   void setupLevel(int aqi) {
     if (aqi <= 100) {
       quality = "Bardzo dobra";
-      advice = "Skorzystaj z dobrego powietrzaa i wyjdź na spacer";
+      advice = "Skorzystaj z dobrego powietrza";
       isGood = true;
     } else if (aqi <= 150) {
       quality = "Nie za dobra";
-      advice = "Jeśli tylko możesz zostań w domu, załatwiaj sprawy online";
+      advice = "Jeśli tylko możesz zostań w domu";
       isBad = true;
     } else {
       quality = "Bardzo zła!";
-      advice = "Zdecydowanie zostań w domu i załatwiaj sprawy online!";
+      advice = "Zdecydowanie zostań w domu!";
     }
   }
 }

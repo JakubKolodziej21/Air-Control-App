@@ -6,7 +6,7 @@ import 'package:weather/weather.dart';
 
 class WeatherScreen extends StatefulWidget {
 
-   WeatherScreen({this.weather});
+   WeatherScreen({super.key, this.weather});
     final Weather? weather;
 
     DateTime now = DateTime.now();
@@ -37,7 +37,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
       body: Stack(fit: StackFit.expand, children: <Widget>[
         Container(
           decoration: BoxDecoration(
-              color: new Color(0xffffffff),
+              color: const Color(0xffffffff),
               gradient: getGradientByMood(widget.weather)),
         ),
 
@@ -47,27 +47,27 @@ class _WeatherScreenState extends State<WeatherScreen> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(padding: EdgeInsets.only(top: 45.0)),
+                const Padding(padding: EdgeInsets.only(top: 45.0)),
                 Image(
                   image: AssetImage('icons/${getIconByMood(widget.weather!)}.png')
                   ),
-                Padding(padding: EdgeInsets.only(top: 41.0)),
+                const Padding(padding: EdgeInsets.only(top: 41.0)),
                 Text("${DateFormat.MMMMEEEEd('pl').format(
                       DateTime.now())}, ${widget.weather?.areaName}\n${widget.weather?.weatherDescription}",
                 textAlign: TextAlign.center,
                 style: GoogleFonts.lato(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     fontSize: 14.0,
                     height: 1.2,
                     color: Colors.white,
                     fontWeight: FontWeight.w400,
                   )
                 ),),
-                Padding(padding: EdgeInsets.only(top: 12.0)),
+                const Padding(padding: EdgeInsets.only(top: 12.0)),
                 Text('${widget.weather!.temperature?.celsius?.floor().toString()}°C',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.lato(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     fontSize: 64.0,
                     height: 1.2,
                     color: Colors.white,
@@ -77,19 +77,19 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 Text('Odczuwalna ${widget.weather?.tempFeelsLike?.celsius?.floor().toString()}°C',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.lato(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     fontSize: 14.0,
                     height: 1.2,
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
                   )
                 ),),
-                 Padding(padding: EdgeInsets.only(top : 25.0)),
+                 const Padding(padding: EdgeInsets.only(top : 25.0)),
                 IntrinsicHeight(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
+                      SizedBox(
                         width: 130,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -97,18 +97,18 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             Text('Ciśnienie',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.lato(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     fontSize: 22.0,
                     height: 1.2,
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
                   )
                 ),),
-                            Padding(padding: EdgeInsets.only(top : 2.0)),
+                            const Padding(padding: EdgeInsets.only(top : 2.0)),
                             Text('${widget.weather!.pressure!.floor().toString()} hPa',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.lato(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     fontSize: 26.0,
                     height: 1.2,
                     color: Colors.white,
@@ -119,13 +119,13 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
                         ),
                       ),
-                      VerticalDivider(
+                      const VerticalDivider(
                         width: 48,
                         thickness: 1,
                         color: Colors.white,
                       ),
 
-                      Container(
+                      SizedBox(
                         width: 130,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -133,18 +133,18 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             Text('Wiatr',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.lato(
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                               fontSize: 22.0,
                               height: 1.2,
                               color: Colors.white,
                               fontWeight: FontWeight.w700,
                             )
                           ),),
-                            Padding(padding: EdgeInsets.only(top : 2.0)),
+                            const Padding(padding: EdgeInsets.only(top : 2.0)),
                             Text('${widget.weather?.windSpeed?.floor().toString()} m/s',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.lato(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     fontSize: 26.0,
                     height: 1.2,
                     color: Colors.white,
@@ -159,19 +159,19 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     ],
                   ),
                   ),
-                    Padding(padding: EdgeInsets.only(top : 24.0)),
+                    const Padding(padding: EdgeInsets.only(top : 24.0)),
                     if(widget.weather?.rainLastHour != null)
                     Text('Opady: ${widget.weather?.rainLastHour} mm/1h',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.lato(
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                               fontSize: 14.0,
                               height: 1.2,
                               color: Colors.white,
                               fontWeight: FontWeight.w400,
                             )
                           ),),
-                    Padding(padding: EdgeInsets.only(top : 68.0)),
+                    const Padding(padding: EdgeInsets.only(top : 68.0)),
 
 
               ],
@@ -207,7 +207,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
 var main = weather?.weatherMain;
     if (main == 'Clouds' || main == 'Drizzle' || main == "Snow" && isNight(weather!)) {
-      return LinearGradient(
+      return const LinearGradient(
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,
           colors: [
@@ -218,27 +218,27 @@ var main = weather?.weatherMain;
     } 
     
   else if(main == 'Clouds' || main == 'Drizzle' || main == "Snow") {
-      return LinearGradient(
+      return const LinearGradient(
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,
           colors: [
             
-             new Color(0xff6E6CD8),
-            new Color(0xff40A0EF),
-            new Color(0xff77E1EE)
+             Color(0xff6E6CD8),
+            Color(0xff40A0EF),
+            Color(0xff77E1EE)
           ]);
     }
 
     else if (main == 'Thunderstorm' || isNight(weather!)) {
-      return LinearGradient(
+      return const LinearGradient(
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
-          colors: [new Color(0xff313545), new Color(0xff121118)]);
+          colors: [Color(0xff313545), Color(0xff121118)]);
     } else {
-      return LinearGradient(
+      return const LinearGradient(
           begin: Alignment.bottomRight,
           end: Alignment.topLeft,
-          colors: [new Color(0xff5283F0), new Color(0xffCDEDD4)]);
+          colors: [Color(0xff5283F0), Color(0xffCDEDD4)]);
     }
 
 
