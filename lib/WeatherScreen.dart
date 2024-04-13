@@ -5,86 +5,86 @@ import 'package:intl/intl.dart';
 import 'package:weather/weather.dart';
 
 class WeatherScreen extends StatefulWidget {
+  WeatherScreen({super.key, this.weather});
 
-   WeatherScreen({super.key, this.weather});
-    final Weather? weather;
+  final Weather? weather;
+  DateTime now = DateTime.now();
 
-    DateTime now = DateTime.now();
-  
- 
   @override
   State<WeatherScreen> createState() => _WeatherScreenState();
-
 }
 
-
-
-
-
-
-
-
 class _WeatherScreenState extends State<WeatherScreen> {
-  
-
-  
+  bool _isCelsius = true;
 
   @override
   Widget build(BuildContext context) {
-    
-
     return Scaffold(
-      body: Stack(fit: StackFit.expand, children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
+      body: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
               color: const Color(0xffffffff),
-              gradient: getGradientByMood(widget.weather)),
-        ),
-
+              gradient: getGradientByMood(widget.weather),
+            ),
+          ),
           Align(
             alignment: FractionalOffset.center,
-            child:
-            Column(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Padding(padding: EdgeInsets.only(top: 45.0)),
-                Image(
-                  image: AssetImage('icons/${getIconByMood(widget.weather!)}.png')
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _isCelsius = !_isCelsius;
+                    });
+                  },
+                  child: Image(
+                    image: AssetImage(
+                        'icons/${getIconByMood(widget.weather!)}.png'),
                   ),
+                ),
                 const Padding(padding: EdgeInsets.only(top: 41.0)),
-                Text("${DateFormat.MMMMEEEEd('pl').format(
-                      DateTime.now())}, ${widget.weather?.areaName}\n${widget.weather?.weatherDescription}",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.lato(
-                  textStyle: const TextStyle(
-                    fontSize: 14.0,
-                    height: 1.2,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                  )
-                ),),
+                Text(
+                  "${DateFormat.MMMMEEEEd('pl').format(DateTime.now())}, ${widget.weather?.areaName}\n${widget.weather?.weatherDescription}",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.lato(
+                    textStyle: const TextStyle(
+                      fontSize: 14.0,
+                      height: 1.2,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
                 const Padding(padding: EdgeInsets.only(top: 12.0)),
-                Text('${widget.weather!.temperature?.celsius?.floor().toString()}°C',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.lato(
-                  textStyle: const TextStyle(
-                    fontSize: 64.0,
-                    height: 1.2,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  )
-                ),),
-                Text('Odczuwalna ${widget.weather?.tempFeelsLike?.celsius?.floor().toString()}°C',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.lato(
-                  textStyle: const TextStyle(
-                    fontSize: 14.0,
-                    height: 1.2,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  )
-                ),),
-                 const Padding(padding: EdgeInsets.only(top : 25.0)),
+                Text(
+                  '${_isCelsius ? widget.weather!.temperature?.celsius?.floor() : widget.weather!.temperature?.fahrenheit?.floor()}${_isCelsius ? "°C" : "°F"}',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.lato(
+                    textStyle: const TextStyle(
+                      fontSize: 64.0,
+                      height: 1.2,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                Text(
+                  'Odczuwalna ${_isCelsius ? widget.weather?.tempFeelsLike?.celsius?.floor() : widget.weather?.tempFeelsLike?.fahrenheit?.floor()}°${_isCelsius ? "C" : "F"}',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.lato(
+                    textStyle: const TextStyle(
+                      fontSize: 14.0,
+                      height: 1.2,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                const Padding(padding: EdgeInsets.only(top: 25.0)),
                 IntrinsicHeight(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -94,29 +94,32 @@ class _WeatherScreenState extends State<WeatherScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Text('Ciśnienie',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.lato(
-                  textStyle: const TextStyle(
-                    fontSize: 22.0,
-                    height: 1.2,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  )
-                ),),
-                            const Padding(padding: EdgeInsets.only(top : 2.0)),
-                            Text('${widget.weather!.pressure!.floor().toString()} hPa',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.lato(
-                  textStyle: const TextStyle(
-                    fontSize: 26.0,
-                    height: 1.2,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  )
-                ),)
+                            Text(
+                              'Ciśnienie',
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.lato(
+                                textStyle: const TextStyle(
+                                  fontSize: 22.0,
+                                  height: 1.2,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                            const Padding(padding: EdgeInsets.only(top: 2.0)),
+                            Text(
+                              '${widget.weather!.pressure!.floor()} hPa',
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.lato(
+                                textStyle: const TextStyle(
+                                  fontSize: 26.0,
+                                  height: 1.2,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            )
                           ],
-
                         ),
                       ),
                       const VerticalDivider(
@@ -124,63 +127,62 @@ class _WeatherScreenState extends State<WeatherScreen> {
                         thickness: 1,
                         color: Colors.white,
                       ),
-
                       SizedBox(
                         width: 130,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Text('Wiatr',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.lato(
-                            textStyle: const TextStyle(
-                              fontSize: 22.0,
-                              height: 1.2,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
+                            Text(
+                              'Wiatr',
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.lato(
+                                textStyle: const TextStyle(
+                                  fontSize: 22.0,
+                                  height: 1.2,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                            const Padding(padding: EdgeInsets.only(top: 2.0)),
+                            Text(
+                              '${_isCelsius ? widget.weather?.windSpeed?.floor() : widget.weather?.windSpeed?.floor()}${_isCelsius ? "m/s" : " mile/h"}',
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.lato(
+                                textStyle: const TextStyle(
+                                  fontSize: 26.0,
+                                  height: 1.2,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
                             )
-                          ),),
-                            const Padding(padding: EdgeInsets.only(top : 2.0)),
-                            Text('${widget.weather?.windSpeed?.floor().toString()} m/s',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.lato(
-                  textStyle: const TextStyle(
-                    fontSize: 26.0,
-                    height: 1.2,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  )
-                ),)
                           ],
-
                         ),
                       ),
-
                     ],
                   ),
+                ),
+                const Padding(padding: EdgeInsets.only(top: 24.0)),
+                if (widget.weather?.rainLastHour != null)
+                  Text(
+                    'Opady: ${widget.weather?.rainLastHour} mm/1h',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.lato(
+                      textStyle: const TextStyle(
+                        fontSize: 14.0,
+                        height: 1.2,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
                   ),
-                    const Padding(padding: EdgeInsets.only(top : 24.0)),
-                    if(widget.weather?.rainLastHour != null)
-                    Text('Opady: ${widget.weather?.rainLastHour} mm/1h',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.lato(
-                            textStyle: const TextStyle(
-                              fontSize: 14.0,
-                              height: 1.2,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w400,
-                            )
-                          ),),
-                    const Padding(padding: EdgeInsets.only(top : 68.0)),
-
-
+                const Padding(padding: EdgeInsets.only(top: 68.0)),
               ],
-            )
-
+            ),
           ),
-          
         ],
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
   
