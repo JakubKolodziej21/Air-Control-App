@@ -146,7 +146,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             ),
                             const Padding(padding: EdgeInsets.only(top: 2.0)),
                             Text(
-                              '${_isCelsius ? widget.weather?.windSpeed?.floor() : widget.weather?.windSpeed?.floor()}${_isCelsius ? "m/s" : " mile/h"}',
+                            '${_isCelsius ? widget.weather?.windSpeed?.floor() : (widget.weather?.windSpeed != null ? (widget.weather!.windSpeed!.floor() / 2.237).toStringAsFixed(2) : "Wystąpił błąd")}${_isCelsius ? " m/s" : " mph"}',
                               textAlign: TextAlign.center,
                               style: GoogleFonts.lato(
                                 textStyle: const TextStyle(
