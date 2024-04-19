@@ -35,9 +35,9 @@ class _ActivityScreenState extends State<ActivityScreen> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Image(image: AssetImage('icons/hand-wave.png')),
+                const Image(image: AssetImage('icons/bored.png')),
                 const Padding(padding: EdgeInsets.only(top: 15.0)),
-                Text('Hej!',
+                Text('Budzimy się!',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.lato(
                   textStyle: const TextStyle(
@@ -47,7 +47,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
                   ) 
                 ),),
                 const Padding(padding: EdgeInsets.only(top: 5.0)),
-                Text('Aplikacja  potrzebuje do działania\nprzybliżonej lokalizacji twojego urządzenia',
+                Text('Aplikacja losuje aktywność, którą możesz wykonać w wolnym czasie!',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.lato(
                   textStyle: const TextStyle(
