@@ -1,4 +1,3 @@
-
 import 'package:air_control_app/ActivityScreen.dart';
 import 'package:air_control_app/AirScreen.dart';
 import 'package:air_control_app/SplashScreen.dart';
@@ -7,11 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:weather/weather.dart';
 
 class MyHomePage extends StatefulWidget {
-    const MyHomePage({super.key, this.weather, this.air});
+  const MyHomePage({super.key, this.weather, this.air});
 
-    final Weather? weather;
-    final AirQuality? air;
-  
+  final Weather? weather;
+  final AirQuality? air;
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -20,30 +19,15 @@ class _MyHomePageState extends State<MyHomePage> {
   var _currentIndex = 0;
   var screens;
 
-
-
-@override
-void initState(){
-
-screens = [
-
-  
-
-    AirScreen(air: widget.air!),
-    if (widget.weather != null) WeatherScreen(weather: widget.weather),
-    ActivityScreen()
-
-
-
+  @override
+  void initState() {
+    screens = [
+      AirScreen(air: widget.air!),
+      if (widget.weather != null) WeatherScreen(weather: widget.weather),
+      const ActivityScreen()
     ];
     super.initState();
-
-}
-
-  
-  
-
-  
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,16 +50,17 @@ screens = [
         // showSelectedLabels: false,
         // showUnselectedLabels: false,
         currentIndex: _currentIndex,
-        onTap: (index) => setState(()=>_currentIndex = index),
+        onTap: (index) => setState(() => _currentIndex = index),
         items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.air_outlined), label: 'Powietrze'),
-        BottomNavigationBarItem(icon: Icon(Icons.cloud_outlined), label: 'Pogoda'),
-        BottomNavigationBarItem(icon: Icon(Icons.local_activity_outlined), label: 'Aktywność')
+          BottomNavigationBarItem(
+              icon: Icon(Icons.air_outlined), label: 'Powietrze'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.cloud_outlined), label: 'Pogoda'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.local_activity_outlined), label: 'Aktywność')
         ],
       ),
-       // This trailing comma makes auto-formatting nicer for build methods.
-    )
-    
-    ;
+      // This trailing comma makes auto-formatting nicer for build methods.
+    );
   }
 }

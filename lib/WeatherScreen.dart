@@ -146,7 +146,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             ),
                             const Padding(padding: EdgeInsets.only(top: 2.0)),
                             Text(
-                            '${_isCelsius ? widget.weather?.windSpeed?.floor() : (widget.weather?.windSpeed != null ? (widget.weather!.windSpeed!.floor() / 2.237).toStringAsFixed(2) : "Wystąpił błąd")}${_isCelsius ? " m/s" : " mph"}',
+                              '${_isCelsius ? widget.weather?.windSpeed?.floor() : (widget.weather?.windSpeed != null ? (widget.weather!.windSpeed!.floor() / 2.237).toStringAsFixed(2) : "Wystąpił błąd")}${_isCelsius ? " m/s" : " mph"}',
                               textAlign: TextAlign.center,
                               style: GoogleFonts.lato(
                                 textStyle: const TextStyle(
@@ -185,7 +185,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
       ),
     );
   }
-  
+
   String getIconByMood(Weather weather) {
     var main = weather.weatherMain;
     if (main == 'Clouds' || main == 'Drizzle' || main == "Snow") {
@@ -200,38 +200,30 @@ class _WeatherScreenState extends State<WeatherScreen> {
   }
 
   bool isNight(Weather weather) {
-  DateTime sunset = weather.sunset ?? DateTime.now(); 
-  DateTime sunrise = weather.sunrise ?? DateTime.now();
-  return DateTime.now().isAfter(sunset) || DateTime.now().isBefore(sunrise);
-}
+    DateTime sunset = weather.sunset ?? DateTime.now();
+    DateTime sunrise = weather.sunrise ?? DateTime.now();
+    return DateTime.now().isAfter(sunset) || DateTime.now().isBefore(sunrise);
+  }
 
- LinearGradient getGradientByMood(Weather? weather) {
-
-var main = weather?.weatherMain;
-    if (main == 'Clouds' || main == 'Drizzle' || main == "Snow" && isNight(weather!)) {
+  LinearGradient getGradientByMood(Weather? weather) {
+    var main = weather?.weatherMain;
+    if (main == 'Clouds' ||
+        main == 'Drizzle' ||
+        main == "Snow" && isNight(weather!)) {
       return const LinearGradient(
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,
           colors: [
-           Color.fromARGB(255, 60, 59, 119),
+            Color.fromARGB(255, 60, 59, 119),
             Color.fromARGB(255, 35, 89, 133),
             Color.fromARGB(255, 31, 56, 59)
           ]);
-    } 
-    
-  else if(main == 'Clouds' || main == 'Drizzle' || main == "Snow") {
+    } else if (main == 'Clouds' || main == 'Drizzle' || main == "Snow") {
       return const LinearGradient(
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,
-          colors: [
-            
-             Color(0xff6E6CD8),
-            Color(0xff40A0EF),
-            Color(0xff77E1EE)
-          ]);
-    }
-
-    else if (main == 'Thunderstorm' || isNight(weather!)) {
+          colors: [Color(0xff6E6CD8), Color(0xff40A0EF), Color(0xff77E1EE)]);
+    } else if (main == 'Thunderstorm' || isNight(weather!)) {
       return const LinearGradient(
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
@@ -242,16 +234,11 @@ var main = weather?.weatherMain;
           end: Alignment.topLeft,
           colors: [Color(0xff5283F0), Color(0xffCDEDD4)]);
     }
-
-
   }
 
-@override
+  @override
   void initState() {
     super.initState();
     initializeDateFormatting();
   }
-
-
-  
 }

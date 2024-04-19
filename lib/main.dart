@@ -2,15 +2,12 @@ import 'package:air_control_app/SplashScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
- //initializeDateFormatting('pl');
+  //initializeDateFormatting('pl');
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  
-  
 
   // This widget is the root of your application.
   @override
@@ -21,11 +18,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }
 
 class Strings {
-    static const String appTitle = 'Air Control';
+  static const String appTitle = 'Air Control';
 }

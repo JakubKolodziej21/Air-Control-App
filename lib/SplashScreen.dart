@@ -29,8 +29,11 @@ class _SplashScreenState extends State<SplashScreen> {
               gradient: LinearGradient(
                   begin: Alignment.centerRight,
                   end: Alignment.centerLeft,
-                  colors: [Color(0xFF00F7FF), Color.fromARGB(255, 52, 133, 255)])),
-                  ),
+                  colors: [
+                    Color(0xFF00F7FF),
+                    Color.fromARGB(255, 52, 133, 255)
+                  ])),
+        ),
         Align(
             alignment: FractionalOffset.center,
             child: Column(
@@ -44,18 +47,18 @@ class _SplashScreenState extends State<SplashScreen> {
                     textAlign: TextAlign.center,
                     style: GoogleFonts.lato(
                         textStyle: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 42.0,
-                          color: Colors.white,
-                        ))),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 42.0,
+                      color: Colors.white,
+                    ))),
                 const Padding(padding: EdgeInsets.only(top: 5.0)),
                 Text('Aplikacja do monitorowania \n czystości powietrza',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.lato(
                         textStyle: const TextStyle(
-                          fontSize: 16.0,
-                          color: Colors.white,
-                        ))),
+                      fontSize: 16.0,
+                      color: Colors.white,
+                    ))),
               ],
             )),
         Positioned(
@@ -68,10 +71,10 @@ class _SplashScreenState extends State<SplashScreen> {
                   textAlign: TextAlign.center,
                   style: GoogleFonts.lato(
                       textStyle: const TextStyle(
-                        fontWeight: FontWeight.w300,
-                        fontSize: 18.0,
-                        color: Colors.white,
-                      ))),
+                    fontWeight: FontWeight.w300,
+                    fontSize: 18.0,
+                    color: Colors.white,
+                  ))),
             ))
       ]), // This trailing comma makes auto-formatting nicer for build methods.
     );
@@ -87,8 +90,8 @@ class _SplashScreenState extends State<SplashScreen> {
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied ||
         permission == LocationPermission.deniedForever) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const PermissionScreen()));
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const PermissionScreen()));
     } else {
       SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
         executeOnceAfterBuild();
@@ -98,14 +101,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void executeOnceAfterBuild() async {
     Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.best,
-        forceAndroidLocationManager: true,
-        timeLimit: const Duration(seconds: 5))
-        .then((value) => { loadLocationData(value)})
+            desiredAccuracy: LocationAccuracy.best,
+            forceAndroidLocationManager: true,
+            timeLimit: const Duration(seconds: 5))
+        .then((value) => {loadLocationData(value)})
         .onError((error, stackTrace) => {
-          Geolocator.getLastKnownPosition(forceAndroidLocationManager: true)
-      .then((value) => {loadLocationData(value!)})
-    });
+              Geolocator.getLastKnownPosition(forceAndroidLocationManager: true)
+                  .then((value) => {loadLocationData(value!)})
+            });
   }
 
   loadLocationData(Position value) async {
@@ -132,10 +135,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => MyHomePage(weather: w, air: aq
-            )
-        )
-    );
+            builder: (context) => MyHomePage(weather: w, air: aq)));
   }
 }
 
@@ -152,7 +152,8 @@ class AirQuality {
   AirQuality(Map<String, dynamic> jsonBody) {
     aqi = int.tryParse(jsonBody['data']['aqi'].toString()) ?? -1;
     pm25 = int.tryParse(jsonBody['data']['iaqi']['pm25']['v'].toString()) ?? -1;
-    pm10 = int.tryParse(jsonBody['data']['iaqi']['pm10']!['v'].toString()) ?? -1;
+    pm10 =
+        int.tryParse(jsonBody['data']['iaqi']['pm10']!['v'].toString()) ?? -1;
     station = jsonBody['data']['city']['name'].toString();
     setupLevel(aqi);
   }

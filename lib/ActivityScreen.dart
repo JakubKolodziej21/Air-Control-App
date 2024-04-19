@@ -4,13 +4,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
 class ActivityScreen extends StatefulWidget {
+  const ActivityScreen({super.key});
+
   @override
   State<ActivityScreen> createState() => _ActivityScreenState();
 }
 
 class _ActivityScreenState extends State<ActivityScreen> {
   Future<Map<String, dynamic>> fetchActivity() async {
-    final response = await http.get(Uri.parse('http://www.boredapi.com/api/activity/'));
+    final response =
+        await http.get(Uri.parse('http://www.boredapi.com/api/activity/'));
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
@@ -26,13 +29,14 @@ class _ActivityScreenState extends State<ActivityScreen> {
         children: <Widget>[
           Container(
             decoration: const BoxDecoration(
-              color: Color(0xffffffff),
-              gradient: LinearGradient(
-                begin: Alignment.centerRight,
-                end: Alignment.centerLeft,
-                colors: [Color.fromARGB(255, 255, 251, 0), Color.fromARGB(255, 255, 218, 52)]
-              )
-            ),
+                color: Color(0xffffffff),
+                gradient: LinearGradient(
+                    begin: Alignment.centerRight,
+                    end: Alignment.centerLeft,
+                    colors: [
+                      Color.fromARGB(255, 255, 251, 0),
+                      Color.fromARGB(255, 255, 218, 52)
+                    ])),
           ),
           Align(
             alignment: FractionalOffset.center,
@@ -64,27 +68,30 @@ class _ActivityScreenState extends State<ActivityScreen> {
                   ),
                 ),
                 const Padding(padding: EdgeInsets.only(top: 30.0)),
-
                 FutureBuilder<Map<String, dynamic>>(
                   future: fetchActivity(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator(color: Colors.blueAccent,);
+                      return const CircularProgressIndicator(
+                        color: Colors.blueAccent,
+                      );
                     } else if (snapshot.hasError) {
                       return Text('Wystąpił błąd: ${snapshot.error}');
                     } else {
                       final activityData = snapshot.data!;
                       return Column(
                         children: [
-                          Text(activityData["activity"],textAlign: TextAlign.center,
-                  style: GoogleFonts.lato(
-                    textStyle: const TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),),
-                          
+                          Text(
+                            activityData["activity"],
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.lato(
+                              textStyle: const TextStyle(
+                                fontSize: 30.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                         ],
                       );
                     }
@@ -93,19 +100,19 @@ class _ActivityScreenState extends State<ActivityScreen> {
                 const Padding(padding: EdgeInsets.only(top: 40.0)),
                 ElevatedButton(
                   style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                padding: MaterialStateProperty.all(const EdgeInsets.only(top:12.0,bottom:12.0,left: 25.0,right: 25.0)),
-              ),
-                  
-                    onPressed: () {
-                      setState(() {});
-                    },
-                    child: Text('Losuj aktywność', style: TextStyle(fontSize: 16.0, color: Colors.black54),)
-                    ,
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.white),
+                    padding: MaterialStateProperty.all(const EdgeInsets.only(
+                        top: 12.0, bottom: 12.0, left: 25.0, right: 25.0)),
                   ),
-
-
-
+                  onPressed: () {
+                    setState(() {});
+                  },
+                  child: const Text(
+                    'Losuj aktywność',
+                    style: TextStyle(fontSize: 16.0, color: Colors.black54),
+                  ),
+                ),
               ],
             ),
           ),
