@@ -1,4 +1,5 @@
 
+import 'package:air_control_app/ActivityScreen.dart';
 import 'package:air_control_app/AirScreen.dart';
 import 'package:air_control_app/SplashScreen.dart';
 import 'package:air_control_app/WeatherScreen.dart';
@@ -30,6 +31,10 @@ screens = [
 
     AirScreen(air: widget.air!),
     if (widget.weather != null) WeatherScreen(weather: widget.weather),
+    ActivityScreen()
+
+
+
     ];
     super.initState();
 
@@ -64,7 +69,8 @@ screens = [
         onTap: (index) => setState(()=>_currentIndex = index),
         items: const [
         BottomNavigationBarItem(icon: Icon(Icons.air_outlined), label: 'Powietrze'),
-        BottomNavigationBarItem(icon: Icon(Icons.cloud_outlined), label: 'Pogoda')
+        BottomNavigationBarItem(icon: Icon(Icons.cloud_outlined), label: 'Pogoda'),
+        BottomNavigationBarItem(icon: Icon(Icons.local_activity_outlined), label: 'Aktywność')
         ],
       ),
        // This trailing comma makes auto-formatting nicer for build methods.
