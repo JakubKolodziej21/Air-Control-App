@@ -20,13 +20,13 @@ To repozytorium zawiera kod źródłowy aplikacji mobilnej napisanej w języku F
 1. Sklonuj repozytorium na swój lokalny komputer:
 
 ```bash
-git clone https://github.com/twoj_uzytkownik/nazwa_projektu.git
+git clone https://github.com/JakubKolodziej21/Air-Control-App.git
 ```
 
 2. Wejdź do katalogu projektu:
 
 ```bash
-cd nazwa_projektu
+cd air_control_app
 ```
 
 3. Zainstaluj wszystkie zależności za pomocą Fluttera:
